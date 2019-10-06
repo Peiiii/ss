@@ -18,7 +18,10 @@ class Socks5Server(socketserver.StreamRequestHandler):
 
 def clean_linux_port(port):
     import os
-    os.system('cleanp '+str(port))
+    try:
+        os.system('cleanp '+str(port))
+    except:
+        print('clean port failed.')
 if __name__=='__main__':
     addr,port ='0.0.0.0',8888
     import platform
