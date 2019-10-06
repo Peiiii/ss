@@ -1,6 +1,5 @@
 import socket, json
 import socketserver,select
-# from utils.encryptor import encrypt,decrypt
 from utils import encryptor
 
 TEST_MODE=0

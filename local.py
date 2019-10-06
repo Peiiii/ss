@@ -1,6 +1,5 @@
 import socket, json
 import socketserver,select,struct
-# from utils.encryptor import encrypt,decrypt
 from utils import encryptor
 
 proxy_addr,proxy_port='127.0.0.1',8888
