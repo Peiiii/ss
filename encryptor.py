@@ -87,9 +87,9 @@ def show_encode(data):
     print('Detect result: ',r)
 
 def encrypt(data):
-
+    show_encode(data)
     return data
 
 def decrypt(data):
-
+    show_encode(data)
     return data

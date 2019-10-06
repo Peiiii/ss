@@ -30,7 +30,7 @@ def connect(head):
 class Socks5Server(socketserver.StreamRequestHandler):
     def handle(self):
         try:
-            tprint('new connection :', self.request)
+            print('new connection :', self.request)
             sock = self.connection
             data=encryptor.decrypt_head(sock.recv(128))
             tprint('data:',data)
