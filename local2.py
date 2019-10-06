@@ -2,7 +2,7 @@ import socket, json
 import socketserver,select,struct
 from utils.encryptor import encrypt,decrypt
 from utils import encryptor
-from wttp import Wttp
+
 proxy_addr,proxy_port='127.0.0.1',8888
 # proxy_addr,proxy_port='45.77.124.235',8888
 proxy_address_family=socket.AF_INET
@@ -38,7 +38,7 @@ def parse_socks5_head(sock):
     if addrtype == 1:  # IPv4
         addr = socket.inet_ntoa(sock.recv(4))
     elif addrtype == 3:  # Domain name
-        addr = sock.recv(ord(sock.recv(1)[0]))
+        addr = str(sock.recv(sock.recv(1)[0]),'utf-8')
     elif addrtype == 4:  # IPv6
         addr = socket.inet_ntop(socket.AF_INET6, sock.recv(16))
     port = struct.unpack('>H', sock.recv(2))[0]
@@ -92,18 +92,16 @@ class Socks5Server(socketserver.StreamRequestHandler):
         try:
             fdset = [sock, remote]
             while True:
-                R = Wttp(remote)
-                S=Wttp(sock)
                 r, w, e = select.select(fdset, [], [])
                 if remote in r:
-                    data=decrypt(R.recv())
+                    data=decrypt(remote.recv(8192))
                     tprint('from remote:%s,%s' % (data, len(data)))
                     if sock.send(data) <= 0: break
                 if sock in r:
                     data=sock.recv(4096)
                     tprint('from brower:%s,%s' % (data, len(data)))
                     if len(data)==0:break
-                    R.send(encrypt(data))
+                    remote.send(encrypt(data))
         finally:
             sock.close()
             remote.close()
