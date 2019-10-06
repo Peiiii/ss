@@ -102,6 +102,17 @@ def decrypt3(data):
     data=text
     return data
 
+def encrypt4(data):
+    text=data
+
+    data=text
+    return data
+
+def decrypt4(data):
+    text=data
+
+    return data
+
 
 def encrypt_head(data):
     data=gzip.compress(data)
@@ -116,10 +127,12 @@ def show_info(data):
 
 def encrypt(data):
     show_info(data)
+    # data=encrypt3(data)
     data=encrypt3(data)
     return data
 
 def decrypt(data):
     show_info(data)
-    data=decrypt3(data)
+    # data=decrypt3(data)
+    data=decrypt4(data)
     return data
