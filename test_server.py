@@ -9,8 +9,9 @@ class Socks5Server(socketserver.StreamRequestHandler):
         try:
             print('new connection :', self.request)
             sock = self.connection
-            data=sock.recv(1024)
+            data=sock.recv(8192)
             print('recieving data:',data)
+            print('length:',len(data))
             self.wfile.write(b'success')
         except socket.error:
             print('socket error')

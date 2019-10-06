@@ -33,21 +33,8 @@ def decode_try(data):
     print('decode failed.')
     return data
 def encrypt1(data):
-    # a=str(data[:10],'utf-8')
-    # print('data:',a)
-    r=chardet.detect(data)
-    print('encoding: %s'%(r))
-
-    en=r['encoding']
-    conf=r['confidence']
-    text='cannot identify content'
-    if conf>0.5:
-        text=str(data,encoding=en)
-    else:
-        text=gzip.decompress(data)
-        text = decode_try(text)
-    print(text)
-    input()
+    return data
+def decrypt1(data):
     return data
 def encrypt2(data):
     r=chardet.detect(data)
@@ -102,37 +89,70 @@ def decrypt3(data):
     data=text
     return data
 
+CONFIRM_HEAD=b'\x11\x12\x13'
+CONFIRM_HEAD=b''
+
 def encrypt4(data):
     text=data
-
+    if len(data)!=0:
+        text=CONFIRM_HEAD+text
     data=text
     return data
 
 def decrypt4(data):
     text=data
+    if len(data)!=0:
+        assert text[:len(CONFIRM_HEAD)]==CONFIRM_HEAD
+        text=text[len(CONFIRM_HEAD):]
+    data=text
+    return data
 
+def encrypt5(data):
+    data2=[]
+    for b in data:
+        data2.append((b+10)%256)
+    data=bytes(data2)
+    return data
+
+def decrypt5(data):
+    data2 = []
+    for b in data:
+        if b>=10:
+            b-=10
+        else:
+            b=b+256-10
+        data2.append(b)
+    data = bytes(data2)
     return data
 
 
 def encrypt_head(data):
-    data=gzip.compress(data)
+    # data=gzip.compress(data)
+    data=E.encrypt(data)
     return data
 def decrypt_head(data):
-    data=gzip.decompress(data)
+    # data=gzip.decompress(data)
+    data=E.decrypt(data)
     return data
 def show_info(data):
     r=chardet.detect(data)
     l=len(data)
-    print('*****Data， Length: %s, encoding: %s'%(l,r))
+    head=data[:3] if l>=3 else data
+    print('*****Data， Length: %s, encoding: %s  head: %s'%(l,r,head))
 
 def encrypt(data):
-    show_info(data)
+    # show_info(data)
     # data=encrypt3(data)
-    data=encrypt4(data)
+    # data=encrypt4(data)
+    data=encrypt5(data)
+    # data=encrypt1(data)
     return data
 
 def decrypt(data):
-    show_info(data)
+    # show_info(data)
     # data=decrypt3(data)
-    data=decrypt4(data)
+    # data=decrypt4(data)
+    data=decrypt5(data)
+    # data=decrypt1(data)
+
     return data

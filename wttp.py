@@ -57,4 +57,4 @@ class Wttp:
     def send(self,data):
         return self.sock.sendall(data)
     def recv(self):
-        return self.sock.recv(1024)
+        return self.sock.recv(8192)

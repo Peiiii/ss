@@ -32,10 +32,11 @@ class Socks5Server(socketserver.StreamRequestHandler):
         try:
             print('new connection :', self.request)
             sock = self.connection
-            data=encryptor.decrypt_head(sock.recv(128))
+            data=sock.recv(256)
+            data = str(data, 'utf-8').strip()
+            data=encryptor.decrypt_head(data)
             tprint('data:',data)
-            head=str(data,'utf-8').strip()
-            head=json.loads(head)
+            head=json.loads(data)
             self.wfile.write(b'success')
             remote = connect(head)
             self.handle_tcp(sock,remote)
