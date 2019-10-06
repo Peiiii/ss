@@ -26,6 +26,7 @@ if __name__=='__main__':
     addr,port ='0.0.0.0',8888
     import platform
     sysstr=platform.system()
+    print('system type: %s'%(sysstr))
     if str=='Linux':
         clean_linux_port(port)
     S=ThreadingTCPServer((addr,port),Socks5Server)
