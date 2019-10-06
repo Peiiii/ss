@@ -6,3 +6,5 @@ def demo():
     sock.sendall(b'hello sever')
     recv=sock.recv(1024)
     print(recv)
+
+demo()
