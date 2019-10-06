@@ -16,9 +16,16 @@ class Socks5Server(socketserver.StreamRequestHandler):
             print('socket error')
             raise
 
+def clean_linux_port(port):
+    import os
+    os.system('cleanp '+str(port))
 if __name__=='__main__':
-
-    S=ThreadingTCPServer(('0.0.0.0',8888),Socks5Server)
+    addr,port ='0.0.0.0',8888
+    import platform
+    sysstr=platform.system()
+    if str=='Linux':
+        clean_linux_port(port)
+    S=ThreadingTCPServer((addr,port),Socks5Server)
     print('waiting for connect...')
     S.serve_forever()
 
