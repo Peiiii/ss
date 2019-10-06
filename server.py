@@ -36,6 +36,7 @@ class Socks5Server(socketserver.StreamRequestHandler):
             data=encryptor.decrypt_head(data)
             tprint('data:',data)
             head=json.loads(data)
+            print('target info: ',head)
             self.wfile.write(b'success')
             remote = connect(head)
             self.handle_tcp(sock,remote)
