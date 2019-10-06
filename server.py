@@ -66,9 +66,10 @@ class Socks5Server(socketserver.StreamRequestHandler):
             remote.close()
             tprint('communication with remote has terminated.')
 def clean_linux_port(port):
-    import os
+    import os,time
     try:
         os.system('cleanp '+str(port))
+        time.sleep(0.2)
     except:
         print('clean port failed.')
 if __name__=='__main__':
