@@ -33,7 +33,6 @@ class Socks5Server(socketserver.StreamRequestHandler):
             print('new connection :', self.request)
             sock = self.connection
             data=sock.recv(256)
-            data = str(data, 'utf-8').strip()
             data=encryptor.decrypt_head(data)
             tprint('data:',data)
             head=json.loads(data)

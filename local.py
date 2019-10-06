@@ -50,7 +50,7 @@ def connect_through_proxy(head):
     remote.connect((proxy_addr, proxy_port))
     print('Tcp connect to remote proxy server %s:%s' % (proxy_addr, proxy_port))
     head2 = json.dumps(head)
-    remote.sendall(bytes(encryptor.encrypt_head(head2),'utf-8'))
+    remote.sendall(encryptor.encrypt_head(head2))
     # time.sleep(1)
     s=remote.recv(7)
     tprint('recv:',s)
