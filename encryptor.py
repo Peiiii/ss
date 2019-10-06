@@ -128,7 +128,7 @@ def show_info(data):
 def encrypt(data):
     show_info(data)
     # data=encrypt3(data)
-    data=encrypt3(data)
+    data=encrypt4(data)
     return data
 
 def decrypt(data):
