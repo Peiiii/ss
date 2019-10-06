@@ -57,6 +57,6 @@ class Socks5Server(socketserver.StreamRequestHandler):
             print('communication with remote has terminated.')
 if __name__=='__main__':
 
-    S=ThreadingTCPServer(('localhost',8888),Socks5Server)
+    S=ThreadingTCPServer(('0.0.0.0',8888),Socks5Server)
     S.serve_forever()
 
