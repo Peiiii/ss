@@ -56,9 +56,9 @@ class Socks5Server(socketserver.StreamRequestHandler):
                     data=remote.recv(4096)
                     tprint('from remote server:%s,%s' % (data, len(data)))
                     if len(data) <= 0: break
-                    S.send(encrypt(data))
+                    sock.send(encrypt(data))
                 if sock in r:
-                    data=decrypt(S.recv())
+                    data=decrypt(sock.recv(8192))
                     tprint('from client:%s,%s' % (data, len(data)))
                     if remote.send(data) <= 0:break
         finally:
