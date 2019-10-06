@@ -1,6 +1,7 @@
 # import socket
 import time
-class Wttp:
+
+class Wttp2:
     def __init__(self,sock):
         self.sock=sock
         self.max_len=4096
@@ -45,3 +46,15 @@ class Wttp:
             data = data[self.max_len:]
         pieces.append(data)
         return pieces
+
+class Wttp:
+    def __init__(self,sock):
+        self.sock=sock
+        self.max_len=4096
+        self.start_bytes=b'\x11\x12\x13'
+        self.confirm_bytes=b'\x00\x00\x00'
+        self.end_bytes=b'\x13\x12\x11'
+    def send(self,data):
+        return self.sock.sendall(data)
+    def recv(self):
+        return self.sock.recv(1024)
