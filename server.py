@@ -2,6 +2,7 @@ import socket, json
 import socketserver,select
 from utils.encryptor import encrypt,decrypt
 from utils import encryptor
+from wttp import Wttp
 
 TEST_MODE=0
 def tprint(*args,**kwargs):
@@ -47,6 +48,8 @@ class Socks5Server(socketserver.StreamRequestHandler):
     def handle_tcp(self,sock, remote):
         try:
             fdset = [sock, remote]
+            R = Wttp(remote)
+            S = Wttp(sock)
             while True:
                 r, w, e = select.select(fdset, [], [])
                 if remote in r:
@@ -63,7 +66,6 @@ class Socks5Server(socketserver.StreamRequestHandler):
             remote.close()
             tprint('communication with remote has terminated.')
 def clean_linux_port(port):
-    return 
     import os,time
     try:
         os.system('cleanp '+str(port))

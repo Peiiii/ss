@@ -2,7 +2,7 @@ import socket, json
 import socketserver,select,struct
 from utils.encryptor import encrypt,decrypt
 from utils import encryptor
-
+from wttp import Wttp
 proxy_addr,proxy_port='127.0.0.1',8888
 proxy_addr,proxy_port='45.77.124.235',8888
 proxy_address_family=socket.AF_INET
@@ -92,6 +92,8 @@ class Socks5Server(socketserver.StreamRequestHandler):
         try:
             fdset = [sock, remote]
             while True:
+                R = Wttp(remote)
+                S=Wttp(sock)
                 r, w, e = select.select(fdset, [], [])
                 if remote in r:
                     data=decrypt(remote.recv(8192))
