@@ -96,14 +96,14 @@ class Socks5Server(socketserver.StreamRequestHandler):
                 S=Wttp(sock)
                 r, w, e = select.select(fdset, [], [])
                 if remote in r:
-                    data=decrypt(R.recv())
+                    data=decrypt(remote.recv(8192))
                     tprint('from remote:%s,%s' % (data, len(data)))
                     if sock.send(data) <= 0: break
                 if sock in r:
                     data=sock.recv(4096)
                     tprint('from brower:%s,%s' % (data, len(data)))
                     if len(data)==0:break
-                    R.send(encrypt(data))
+                    remote.send(encrypt(data))
         finally:
             sock.close()
             remote.close()
