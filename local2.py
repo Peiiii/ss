@@ -4,7 +4,7 @@ from encryptor import encrypt,decrypt
 import encryptor
 from wttp import Wttp
 proxy_addr,proxy_port='127.0.0.1',8888
-proxy_addr,proxy_port='45.77.124.235',8888
+# proxy_addr,proxy_port='45.77.124.235',8888
 proxy_address_family=socket.AF_INET
 
 TEST_MODE=0

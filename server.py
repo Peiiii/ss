@@ -2,7 +2,7 @@ import socket,time,json
 import socketserver,select,struct
 from encryptor import encrypt,decrypt
 import encryptor
-
+from wttp import Wttp
 
 TEST_MODE=0
 def tprint(*args,**kwargs):
@@ -45,16 +45,17 @@ class Socks5Server(socketserver.StreamRequestHandler):
     def handle_tcp(self,sock, remote):
         try:
             fdset = [sock, remote]
+            R = Wttp(remote)
+            S = Wttp(sock)
             while True:
                 r, w, e = select.select(fdset, [], [])
                 if remote in r:
                     data=remote.recv(4096)
                     tprint('from remote server:%s,%s' % (data, len(data)))
-                    data=encrypt(data)
-                    if sock.send(data) <= 0: break
+                    if len(data) <= 0: break
+                    S.send(encrypt(data))
                 if sock in r:
-                    data = sock.recv(4096)
-                    data=decrypt(data)
+                    data=decrypt(S.recv())
                     tprint('from client:%s,%s' % (data, len(data)))
                     if remote.send(data) <= 0:break
         finally:

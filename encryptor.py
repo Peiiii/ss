@@ -1,7 +1,7 @@
 
 # coding: utf8
 import chardet,gzip,zlib,zipfile
-import os,shutil
+import os,shutil,math
 from  des import des
 import base64
 class Encryptor():
@@ -76,6 +76,31 @@ def decrypt2(data):
         print('decrypt length:',len(text))
         data=text
     return data
+
+def encrypt3(data):
+    text=data
+    text=b''
+    per_len=3
+    fillbyte=b'\x12'
+    num=math.ceil(len(data)/per_len)-1
+    for i in range(num):
+        text+=data[i*per_len:(i+1)*per_len]+fillbyte
+    text+=data[num*per_len:]
+    data=text
+    return data
+
+def decrypt3(data):
+    text=data
+    text=b''
+    per_len=3
+    num=math.ceil(len(data)/(per_len+1))-1
+    for i in range(num):
+        text+=data[(per_len+1)*i:((per_len+1)*(i+1)-1)]
+    text+=data[num*(per_len+1):]
+    data=text
+    return data
+
+
 def encrypt_head(data):
     data=gzip.compress(data)
     return data
@@ -89,8 +114,10 @@ def show_info(data):
 
 def encrypt(data):
     show_info(data)
+    data=encrypt3(data)
     return data
 
 def decrypt(data):
     show_info(data)
+    data=decrypt3(data)
     return data
