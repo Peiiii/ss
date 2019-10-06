@@ -38,7 +38,7 @@ def parse_socks5_head(sock):
     if addrtype == 1:  # IPv4
         addr = socket.inet_ntoa(sock.recv(4))
     elif addrtype == 3:  # Domain name
-        addr = sock.recv(ord(sock.recv(1)[0]))
+        addr = str(sock.recv(sock.recv(1)[0]),'utf-8')
     elif addrtype == 4:  # IPv6
         addr = socket.inet_ntop(socket.AF_INET6, sock.recv(16))
     port = struct.unpack('>H', sock.recv(2))[0]

@@ -8,5 +8,13 @@ def demo():
     print(a)
     recv=sock.recv(1024)
     print(recv)
+def demo2():
+    sock=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    sock.connect(('www.baidu.com',80))
+    print('connected..')
+    a=sock.sendall(b'')
+    print(a)
+    recv=sock.recv(1024)
+    print(recv)
 
-demo()
+demo2()

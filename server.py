@@ -17,6 +17,8 @@ def connect(head):
     port=head['port']
     if addrtype==1:
         sock=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    elif addrtype==3:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     elif addrtype==4:
         sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
     try:
