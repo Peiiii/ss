@@ -1,6 +1,6 @@
 import socket, json
 import socketserver,select,struct
-from utils.encryptor import encrypt,decrypt
+# from utils.encryptor import encrypt,decrypt
 from utils import encryptor
 
 proxy_addr,proxy_port='127.0.0.1',8888
@@ -94,14 +94,14 @@ class Socks5Server(socketserver.StreamRequestHandler):
             while True:
                 r, w, e = select.select(fdset, [], [])
                 if remote in r:
-                    data=decrypt(remote.recv(8192))
+                    data=encryptor.decrypt(remote.recv(8192))
                     tprint('from remote:%s,%s' % (data, len(data)))
                     if sock.send(data) <= 0: break
                 if sock in r:
                     data=sock.recv(4096)
                     tprint('from brower:%s,%s' % (data, len(data)))
                     if len(data)==0:break
-                    remote.send(encrypt(data))
+                    remote.send(encryptor.encrypt(data))
         finally:
             sock.close()
             remote.close()

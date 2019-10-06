@@ -1,6 +1,6 @@
 import socket, json
 import socketserver,select
-from utils.encryptor import encrypt,decrypt
+# from utils.encryptor import encrypt,decrypt
 from utils import encryptor
 
 TEST_MODE=0
@@ -53,9 +53,9 @@ class Socks5Server(socketserver.StreamRequestHandler):
                     data=remote.recv(4096)
                     tprint('from remote server:%s,%s' % (data, len(data)))
                     if len(data) <= 0: break
-                    sock.send(encrypt(data))
+                    sock.send(encryptor.encrypt(data))
                 if sock in r:
-                    data=decrypt(sock.recv(8192))
+                    data=encryptor.decrypt(sock.recv(8192))
                     tprint('from client:%s,%s' % (data, len(data)))
                     if remote.send(data) <= 0:break
         finally:
