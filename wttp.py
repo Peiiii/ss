@@ -1,5 +1,5 @@
 # import socket
-
+import time
 class Wttp:
     def __init__(self,sock):
         self.sock=sock
@@ -36,6 +36,8 @@ class Wttp:
                     return data
                 else:
                     raise Exception('Recieved {} but expected {}'.format(r,data))
+            else:
+                time.sleep(0.02)
     def cut_data(self,data):
         pieces = []
         while len(data) > self.max_len:

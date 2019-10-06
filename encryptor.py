@@ -86,11 +86,13 @@ def encrypt3(data):
     for i in range(num):
         text+=data[i*per_len:(i+1)*per_len]+fillbyte
     text+=data[num*per_len:]
-    data=b'\x11\x12\x13'+text
+    data=text
+    # data=b'\x11\x12\x13'+text
     return data
 
 def decrypt3(data):
-    text=data[3:]
+    text=data
+    # text=data[3:]
     text=b''
     per_len=30
     num=math.ceil(len(data)/(per_len+1))-1
