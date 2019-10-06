@@ -3,6 +3,12 @@ import socketserver,select,struct
 from encryptor import encrypt,decrypt
 import encryptor
 
+
+TEST_MODE=0
+def tprint(*args,**kwargs):
+    if TEST_MODE:
+        print(*args,**kwargs)
+
 class ThreadingTCPServer(socketserver.ThreadingMixIn,socketserver.TCPServer):
     pass
 def connect(head):
@@ -16,7 +22,7 @@ def connect(head):
     try:
         sock.connect((addr,port))
     except:
-        print(addr,port)
+        tprint(addr,port)
         raise
 
     return sock
@@ -24,17 +30,17 @@ def connect(head):
 class Socks5Server(socketserver.StreamRequestHandler):
     def handle(self):
         try:
-            print('new connection :', self.request)
+            tprint('new connection :', self.request)
             sock = self.connection
             data=encryptor.decrypt_head(sock.recv(128))
-            print('data:',data)
+            tprint('data:',data)
             head=str(data,'utf-8').strip()
             head=json.loads(head)
             self.wfile.write(b'success')
             remote = connect(head)
             self.handle_tcp(sock,remote)
         except socket.error:
-            print('socket error')
+            tprint('socket error')
             raise
     def handle_tcp(self,sock, remote):
         try:
@@ -43,18 +49,18 @@ class Socks5Server(socketserver.StreamRequestHandler):
                 r, w, e = select.select(fdset, [], [])
                 if remote in r:
                     data=remote.recv(4096)
-                    print('from remote server:%s,%s' % (data, len(data)))
+                    tprint('from remote server:%s,%s' % (data, len(data)))
                     data=encrypt(data)
                     if sock.send(data) <= 0: break
                 if sock in r:
                     data = sock.recv(4096)
                     data=decrypt(data)
-                    print('from client:%s,%s' % (data, len(data)))
+                    tprint('from client:%s,%s' % (data, len(data)))
                     if remote.send(data) <= 0:break
         finally:
             sock.close()
             remote.close()
-            print('communication with remote has terminated.')
+            tprint('communication with remote has terminated.')
 def clean_linux_port(port):
     import os
     try:

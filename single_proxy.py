@@ -86,6 +86,6 @@ class Socks5Server(socketserver.StreamRequestHandler):
 
 if __name__=='__main__':
 
-    S=ThreadingTCPServer(('localhost',9999),Socks5Server)
+    S=ThreadingTCPServer(('0.0.0.0',9999),Socks5Server)
     S.serve_forever()
 
