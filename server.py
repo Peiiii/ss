@@ -55,8 +55,19 @@ class Socks5Server(socketserver.StreamRequestHandler):
             sock.close()
             remote.close()
             print('communication with remote has terminated.')
+def clean_linux_port(port):
+    import os
+    try:
+        os.system('cleanp '+str(port))
+    except:
+        print('clean port failed.')
 if __name__=='__main__':
-
-    S=ThreadingTCPServer(('0.0.0.0',8888),Socks5Server)
+    addr,port ='0.0.0.0',8888
+    import platform
+    sysstr=platform.system()
+    print('system type: %s'%(sysstr))
+    if str=='Linux':
+        clean_linux_port(port)
+    S=ThreadingTCPServer((addr,port),Socks5Server)
+    print('waiting for connect...')
     S.serve_forever()
-
