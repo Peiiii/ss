@@ -1,9 +1,9 @@
 
 # coding: utf8
-import chardet,gzip,zlib,zipfile
-import os,shutil,math
-from  des import des
-import base64
+import chardet
+from .des import des
+
+
 class Encryptor():
     def __init__(self, key):
         self.key = key

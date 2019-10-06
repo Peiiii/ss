@@ -1,7 +1,7 @@
-import socket,time,json
-import socketserver,select,struct
-from encryptor import encrypt,decrypt
-import encryptor
+import socket, json
+import socketserver,select
+from utils.encryptor import encrypt,decrypt
+from utils import encryptor
 from wttp import Wttp
 
 TEST_MODE=0

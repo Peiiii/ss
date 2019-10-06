@@ -1,7 +1,7 @@
-import socket,time,json
+import socket, json
 import socketserver,select,struct
-from encryptor import encrypt,decrypt
-import encryptor
+from utils.encryptor import encrypt,decrypt
+from utils import encryptor
 from wttp import Wttp
 proxy_addr,proxy_port='127.0.0.1',8888
 # proxy_addr,proxy_port='45.77.124.235',8888
