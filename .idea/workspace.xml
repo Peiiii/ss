@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a72ff72a-bcaa-4d6c-aa17-ccb5bcb4dd07" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/trash/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/browser.py" beforeDir="false" afterPath="$PROJECT_DIR$/trash/browser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/single_proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/trash/single_proxy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/trash/test_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/trash/test_server.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uprun" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,6 +78,7 @@
         <option value="$PROJECT_DIR$/local.py" />
         <option value="$PROJECT_DIR$/server.py" />
         <option value="$PROJECT_DIR$/encryptor.py" />
+        <option value="$PROJECT_DIR$/uprun" />
       </list>
     </option>
   </component>
@@ -276,6 +273,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7566265" visible="true" weight="0.3415409" />
       <window_info id="Structure" order="1" sideWeight="0.2433735" side_tool="true" visible="true" weight="0.2494043" />
@@ -348,6 +346,13 @@
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uprun">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
         </state>
       </provider>
     </entry>
