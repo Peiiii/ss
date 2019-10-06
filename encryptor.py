@@ -85,7 +85,7 @@ def decrypt_head(data):
 def show_info(data):
     r=chardet.detect(data)
     l=len(data)
-    print('Length: %s, encoding : '%(l,r))
+    print('*****Data， Length: %s, encoding: %s'%(l,r))
 
 def encrypt(data):
     show_info(data)
