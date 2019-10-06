@@ -19,5 +19,6 @@ class Socks5Server(socketserver.StreamRequestHandler):
 if __name__=='__main__':
 
     S=ThreadingTCPServer(('0.0.0.0',8888),Socks5Server)
+    print('waiting for connect...')
     S.serve_forever()
 
