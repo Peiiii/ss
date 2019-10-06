@@ -82,14 +82,15 @@ def encrypt_head(data):
 def decrypt_head(data):
     data=gzip.decompress(data)
     return data
-def show_encode(data):
+def show_info(data):
     r=chardet.detect(data)
-    print('Detect result: ',r)
+    l=len(data)
+    print('Length: %s, encoding : '%(l,r))
 
 def encrypt(data):
-    show_encode(data)
+    show_info(data)
     return data
 
 def decrypt(data):
-    show_encode(data)
+    show_info(data)
     return data
