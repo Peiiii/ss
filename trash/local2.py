@@ -2,8 +2,14 @@ import socket, json
 import socketserver,select,struct
 from utils import encryptor
 
-proxy_addr,proxy_port='127.0.0.1',8888
+# proxy_addr,proxy_port='127.0.0.1',8888
 # proxy_addr,proxy_port='45.77.124.235',8888
+
+
+
+with open('config.json','r') as f:
+    cfg=json.load(f)
+proxy_addr,proxy_port=cfg['remote_server_address'],cfg['remote_server_port']
 proxy_address_family=socket.AF_INET
 
 TEST_MODE=0
@@ -106,8 +112,11 @@ class Socks5Server(socketserver.StreamRequestHandler):
             remote.close()
             print('communication with remote has terminated.')
 
-if __name__=='__main__':
-
-    S=ThreadingTCPServer(('localhost',9999),Socks5Server)
+def run_local():
+    S = ThreadingTCPServer(('localhost', 9999), Socks5Server)
     S.serve_forever()
+
+if __name__=='__main__':
+    run_local()
+
 
