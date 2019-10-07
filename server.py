@@ -78,4 +78,11 @@ if __name__=='__main__':
         clean_linux_port(port)
     S=ThreadingTCPServer((addr,port),Socks5Server)
     print('waiting for connect...')
+
+    import signal
+    def stop(signal,frame):
+        # S.shutdown()
+        print('server stopping...')
+        quit(0)
+    signal.signal(signal.SIGINT,stop)
     S.serve_forever()
