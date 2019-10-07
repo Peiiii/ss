@@ -3,16 +3,24 @@ This is a tool helping you surfing the internet more freely.This is a socks serv
 
 Trying to streamline the pipeline to finish all by one command.
 
-**usage**
+*Usage**
 ---
 - *clinet end*
 > - git clone ...
-> - click on wpss.bat to run
+> - python start.py
 - *server end*
+> - git clone
+> - python server.py
 
+**What's next?**
+---
+> - make the server end more easy-to-use
+> - make the linux client more easy-to-use
+> - improve the procy_pac.js file
+> - promote the speed
 
-**pipeline**
---
+**Pipeline**
+---
 - *client end*
 1. config the remote ss server address and port 
 2. set the automatic proxy configuration script link on the system platform
