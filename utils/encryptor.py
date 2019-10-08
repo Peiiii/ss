@@ -96,17 +96,17 @@ def show_info(data):
 
 def encrypt(data):
     # show_info(data)
-    # data=encrypt1(data)
+    data=encrypt1(data)
     # data=encrypt5(data)
-    data=encrypt6(data)
+    # data=encrypt6(data)
     # data=encrypt2(data)
     return data
 
 def decrypt(data):
     # show_info(data)
-    # data=decrypt1(data)
+    data=decrypt1(data)
     # data=decrypt5(data)
-    data=decrypt6(data)
+    # data=decrypt6(data)
     # data=decrypt2(data)
     return data
 
