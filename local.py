@@ -88,7 +88,7 @@ class Socks5Server(socketserver.StreamRequestHandler):
                 raise
             self.wfile.write(reply)
             tprint('reply to browser:',reply)
-            self.test_firewall(remote)
+            # self.test_firewall(remote)
             self.handle_tcp(sock, remote)
         except socket.error:
             print('socket error')

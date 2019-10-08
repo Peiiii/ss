@@ -38,7 +38,7 @@ class Socks5Server(socketserver.StreamRequestHandler):
             head=json.loads(data)
             print('target info: ',head)
             self.wfile.write(b'success')
-            self.test_firewall(sock)
+            # self.test_firewall(sock)
             remote = connect(head)
             self.handle_tcp(sock,remote)
         except socket.error:
