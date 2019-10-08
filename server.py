@@ -1,4 +1,4 @@
-import socket, json
+import socket, json,argparse
 import socketserver,select
 from utils import encryptor
 
@@ -69,20 +69,32 @@ def clean_linux_port(port):
         time.sleep(0.2)
     except:
         print('clean port failed.')
-if __name__=='__main__':
-    addr,port ='0.0.0.0',8888
+def main():
+    addr, port = '0.0.0.0', 8888
     import platform
-    sysstr=platform.system()
-    print('system type: %s'%(sysstr))
-    if str=='Linux':
+    sysstr = platform.system()
+    print('system type: %s' % (sysstr))
+    if str == 'Linux':
         clean_linux_port(port)
-    S=ThreadingTCPServer((addr,port),Socks5Server)
+    S = ThreadingTCPServer((addr, port), Socks5Server)
     print('waiting for connect...')
 
     import signal
-    def stop(signal,frame):
+    def stop(signal, frame):
         # S.shutdown()
         print('server stopping...')
         quit(0)
-    signal.signal(signal.SIGINT,stop)
+
+    signal.signal(signal.SIGINT, stop)
     S.serve_forever()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser()
+    parser.add_argument('-t',action='store_true',help='run in test mode')
+    parser.add_argument('-s',action='store_true',help='run in silent mode')
+    args=parser.parse_args()
+    print(args)
+    if args.t:
+        TEST_MODE=1
+    if args.s:
+        SILENT_MODE=1
+    main()
