@@ -86,12 +86,23 @@ class Socks5Server(socketserver.StreamRequestHandler):
                 raise
             self.wfile.write(reply)
             tprint('reply to browser:',reply)
-            # 3. Transfering
+            self.test_firewall(remote)
             self.handle_tcp(sock, remote)
         except socket.error:
             print('socket error')
             raise
-
+    def test_firewall(self,sock):
+        def confirm(sock):
+            data=sock.recv(4096)
+            if not isinstance(data,str):
+                data=str(data)
+                data='I(client) recieved :'+data
+                print('**test_firewall_resv:',data)
+                data=bytes(data,'utf-8')
+                sock.sendall(data)
+        confirm(sock)
+        confirm(sock)
+        confirm(sock)
     def handle_tcp(self,sock, remote):
         print('local server start exchanging data between client and remote.')
         try:

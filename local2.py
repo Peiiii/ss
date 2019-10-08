@@ -2,6 +2,8 @@ import socket, json
 import socketserver,select,struct
 from utils import encryptor
 
+# proxy_addr,proxy_port='127.0.0.1',8888
+# proxy_addr,proxy_port='45.77.124.235',8888
 
 
 
@@ -9,10 +11,7 @@ with open('config.json','r') as f:
     cfg=json.load(f)
 proxy_addr,proxy_port=cfg['remote_server_address'],cfg['remote_server_port']
 proxy_address_family=socket.AF_INET
-
-proxy_addr,proxy_port='45.77.124.235',8888
-# proxy_addr,proxy_port='127.0.0.1',8888
-
+proxy_addr,proxy_port='127.0.0.1',8888
 
 TEST_MODE=0
 def tprint(*args,**kwargs):
@@ -88,12 +87,23 @@ class Socks5Server(socketserver.StreamRequestHandler):
                 raise
             self.wfile.write(reply)
             tprint('reply to browser:',reply)
-            # 3. Transfering
+            self.test_firewall(remote)
             self.handle_tcp(sock, remote)
         except socket.error:
             print('socket error')
             raise
-
+    def test_firewall(self,sock):
+        def confirm(sock):
+            data=sock.recv(4096)
+            if not isinstance(data,str):
+                data=str(data)
+                data='I(client) recieved :'+data
+                print('**test_firewall_resv:',data)
+                data=bytes(data,'utf-8')
+                sock.sendall(data)
+        confirm(sock)
+        confirm(sock)
+        confirm(sock)
     def handle_tcp(self,sock, remote):
         print('local server start exchanging data between client and remote.')
         try:

@@ -38,11 +38,27 @@ class Socks5Server(socketserver.StreamRequestHandler):
             head=json.loads(data)
             print('target info: ',head)
             self.wfile.write(b'success')
+            self.test_firewall(sock)
             remote = connect(head)
             self.handle_tcp(sock,remote)
         except socket.error:
             tprint('socket error')
             raise
+    def test_firewall(self,sock):
+        def test_text(sock,data):
+            if not isinstance(data,bytes):
+                data=bytes(data,'utf-8')
+            sock.sendall(data)
+            data=sock.recv(4096)
+            if not isinstance(data,str):
+                data=str(data)
+            print('**test_firewall_resv:',data)
+        t1=b'\x12\x13\x14'
+        t2='jnhdbrvngri'
+        t3='hello'
+        test_text(sock,t1)
+        test_text(sock,t2)
+        test_text(sock,t3)
     def handle_tcp(self,sock, remote):
         try:
             fdset = [sock, remote]
