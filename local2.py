@@ -104,6 +104,7 @@ class Socks5Server(socketserver.StreamRequestHandler):
         confirm(sock)
         confirm(sock)
         confirm(sock)
+        confirm(sock)
     def handle_tcp(self,sock, remote):
         print('local server start exchanging data between client and remote.')
         try:

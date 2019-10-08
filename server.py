@@ -54,11 +54,13 @@ class Socks5Server(socketserver.StreamRequestHandler):
                 data=str(data)
             print('**test_firewall_resv:',data)
         t1=b'\x12\x13\x14'
-        t2='jnhdbrvngri'
+        t2=b'\x12'*100
         t3='hello'
+        t4='kjjdchdfgfgh'
         test_text(sock,t1)
         test_text(sock,t2)
         test_text(sock,t3)
+        test_text(sock,t4)
     def handle_tcp(self,sock, remote):
         try:
             fdset = [sock, remote]
