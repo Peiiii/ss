@@ -2,8 +2,6 @@ import socket, json
 import socketserver,select,struct
 from utils import encryptor
 
-# proxy_addr,proxy_port='127.0.0.1',8888
-# proxy_addr,proxy_port='45.77.124.235',8888
 
 
 
@@ -11,6 +9,10 @@ with open('config.json','r') as f:
     cfg=json.load(f)
 proxy_addr,proxy_port=cfg['remote_server_address'],cfg['remote_server_port']
 proxy_address_family=socket.AF_INET
+
+proxy_addr,proxy_port='45.77.124.235',8888
+# proxy_addr,proxy_port='127.0.0.1',8888
+
 
 TEST_MODE=0
 def tprint(*args,**kwargs):
