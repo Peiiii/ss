@@ -11,7 +11,8 @@ with open('config.json','r') as f:
     cfg=json.load(f)
 proxy_addr,proxy_port=cfg['remote_server_address'],cfg['remote_server_port']
 proxy_address_family=socket.AF_INET
-proxy_addr,proxy_port='127.0.0.1',8888
+
+
 
 TEST_MODE=0
 def tprint(*args,**kwargs):
@@ -130,6 +131,7 @@ def run_local():
     S.serve_forever()
 
 if __name__=='__main__':
+    proxy_addr,proxy_port='127.0.0.1',8888
     run_local()
 
 

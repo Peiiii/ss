@@ -25,21 +25,27 @@ def encrypt1(data):
     return data
 def decrypt1(data):
     return data
-
+def encrypt2(data):
+    data=data[::-1]
+    return data
+def decrypt2(data):
+    data=data[::-1]
+    return data
+N=57
 def encrypt5(data):
     data2=[]
     for b in data:
-        data2.append((b+10)%256)
+        data2.append((b+N)%256)
     data=bytes(data2)
     return data
 
 def decrypt5(data):
     data2 = []
     for b in data:
-        if b>=10:
-            b-=10
+        if b>=N:
+            b-=N
         else:
-            b=b+256-10
+            b=b+256-N
         data2.append(b)
     data = bytes(data2)
     return data
@@ -64,13 +70,15 @@ def show_info(data):
 
 def encrypt(data):
     # show_info(data)
-    data=encrypt5(data)
     # data=encrypt1(data)
+    data=encrypt5(data)
+    # data=encrypt2(data)
     return data
 
 def decrypt(data):
     # show_info(data)
-    data=decrypt5(data)
     # data=decrypt1(data)
-
+    data=decrypt5(data)
+    # data=decrypt2(data)
     return data
+
