@@ -88,7 +88,7 @@ class Socks5Server(socketserver.StreamRequestHandler):
                 raise
             self.wfile.write(reply)
             tprint('reply to browser:',reply)
-            self.test_firewall(remote)
+            # self.test_firewall(remote)
             self.handle_tcp(sock, remote)
         except socket.error:
             print('socket error')
@@ -131,7 +131,7 @@ def run_local():
     S.serve_forever()
 
 if __name__=='__main__':
-    proxy_addr,proxy_port='127.0.0.1',8888
+    # proxy_addr,proxy_port='127.0.0.1',8888
     run_local()
 
 
