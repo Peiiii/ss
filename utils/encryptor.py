@@ -47,14 +47,14 @@ def decrypt5(data):
 
 def encrypt_head(data):
     # data=gzip.compress(data)
-    data=E.encrypt(data)
+    # data=E.encrypt(data)
     data=bytes(data,'utf-8')
     data=encrypt5(data)
     return data
 def decrypt_head(data):
     data=decrypt5(data)
     data=str(data,'utf-8')
-    data=E.decrypt(data)
+    # data=E.decrypt(data)
     return data
 def show_info(data):
     r=chardet.detect(data)
