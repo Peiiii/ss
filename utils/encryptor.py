@@ -4,7 +4,7 @@ import chardet
 from .des import des
 
 
-class Encryptor():
+class DesEncryptor():
     def __init__(self, key):
         self.key = key
         self.des=des()
@@ -18,7 +18,8 @@ class Encryptor():
         return data
 
 
-E=Encryptor('Wp@000001')
+E=DesEncryptor('Wp@000001')
+
 
 def encrypt1(data):
     return data
@@ -63,13 +64,13 @@ def show_info(data):
 
 def encrypt(data):
     # show_info(data)
-    # data=encrypt5(data)
-    data=encrypt1(data)
+    data=encrypt5(data)
+    # data=encrypt1(data)
     return data
 
 def decrypt(data):
     # show_info(data)
-    # data=decrypt5(data)
-    data=decrypt1(data)
+    data=decrypt5(data)
+    # data=decrypt1(data)
 
     return data
